@@ -4,13 +4,13 @@ import network
 import time
 
 #wifi setting
-SSID="SFR_A0F0_EXT" #insert your wifi ssid
-PASSWORD="osto7rawayristaxtris" #insert your wifi password
+SSID="WIFI_SSID" #insert your wifi ssid
+PASSWORD="WIFI_PASSWORD" #insert your wifi password
 
 SERVER = "mqtt.mydevices.com"
 CLIENT_ID = "CAYENNE_CLIENT_ID" #insert your client ID
 username='CAYENNE_USERNAME' #insert your MQTT username
-password='CAYENNE_PASSWORK' #insert your MQTT password
+password='CAYENNE_PASSWORD' #insert your MQTT password
 
 TOPIC = ("v1/%s/things/%s/data/1" % (username, CLIENT_ID))
 
