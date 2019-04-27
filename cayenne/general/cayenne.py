@@ -16,9 +16,9 @@ SSID="SFR_A0F0_EXT" #insert your wifi ssid
 PASSWORD="osto7rawayristaxtris" #insert your wifi password
 
 SERVER = "mqtt.mydevices.com"
-CLIENT_ID = "dae86710-4ae9-11e9-a6b5-e30ec853fbf2"  #insert your client ID
-username='7c70a330-69af-11e8-a76a-fdebb8d0010d'     #insert your MQTT username
-password='32d184add41570759dd1735fa464cef7e62876a4' #insert your MQTT password
+CLIENT_ID = "CAYENNE_CLIENT_ID"  #insert your client ID
+username='CAYENNE_USERNAME'     #insert your MQTT username
+password='CAYENNE_PASSWORD' #insert your MQTT password
 
 class Cayenne:
     def __init__(self,client_id=CLIENT_ID):

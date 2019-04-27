@@ -1,7 +1,7 @@
 from cayenne import Cayenne
 
-CLIENT_ID="d6accfc0-6541-11e9-bdb5-dfd20f02ea3f"
-username='7c70a330-69af-11e8-a76a-fdebb8d0010d'
+CLIENT_ID="CAYENNE_CLIENT_ID"
+username='CAYENNE_USERNAME'
 TOPIC_BASE = ("v1/%s/things/" % username)
 
 def subscribeCayenne(clientID,channel):

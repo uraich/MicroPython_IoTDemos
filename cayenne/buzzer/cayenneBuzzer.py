@@ -13,11 +13,11 @@ import cayenne.client
 import sys,time
 import logging
 
-MQTT_CLIENT_ID = "dae86710-4ae9-11e9-a6b5-e30ec853fbf2" #insert your client ID
-MQTT_USERNAME='7c70a330-69af-11e8-a76a-fdebb8d0010d' #insert your MQTT username
-MQTT_PASSWORD='32d184add41570759dd1735fa464cef7e62876a4' #insert your MQTT password
+MQTT_CLIENT_ID = "CAYENNE_CLIENT_ID" #insert your client ID
+MQTT_USERNAME='CAYENNE_USERNAME' #insert your MQTT username
+MQTT_PASSWORD='CAYENNE_PASSWORD' #insert your MQTT password
 
-laptopClient="4dde8070-593f-11e9-bb1a-97096e6377d3"
+laptopClient="CLIENT_ID_OF_LAPTOP_CLIENT"
 
 PWM_PIN=14
 speaker_pin=Pin(PWM_PIN)

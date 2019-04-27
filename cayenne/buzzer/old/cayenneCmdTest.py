@@ -8,11 +8,11 @@
 from cayenne import Cayenne
 import sys,time
 SERVER = "mqtt.mydevices.com"
-CLIENT_ID = "dae86710-4ae9-11e9-a6b5-e30ec853fbf2" #insert your client ID
-username='7c70a330-69af-11e8-a76a-fdebb8d0010d' #insert your MQTT username
-password='32d184add41570759dd1735fa464cef7e62876a4' #insert your MQTT password
+CLIENT_ID = "CAYENNE_CLIENT_ID" #insert your client ID
+username='CAYENNE_USERNAME' #insert your MQTT username
+password='CAYENNE_PASSWORD' #insert your MQTT password
 
-laptopClient="4dde8070-593f-11e9-bb1a-97096e6377d3"
+laptopClient="LAPTOP_CLIENT_ID"
 
 TOPIC_BASE = ("v1/%s/things/" % username)
 cayenne=Cayenne()

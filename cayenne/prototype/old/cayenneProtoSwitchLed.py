@@ -13,8 +13,8 @@ wSize       = 64  # Largeur ecran en pixels | display width in pixels
 oledIsConnected = False
 cayenneChannel=1
 # Cayenne definitions
-username='7c70a330-69af-11e8-a76a-fdebb8d0010d'
-CLIENT_ID="d6accfc0-6541-11e9-bdb5-dfd20f02ea3f"
+username='CAYENNE_USERNAME'
+CLIENT_ID="CAYENNE_CLIENT_ID"
 TOPIC_BASE = ("v1/%s/things/" % username)
 
 intensityChannel=1

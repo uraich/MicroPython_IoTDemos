@@ -13,7 +13,7 @@ wSize       = 64  # Largeur ecran en pixels | display width in pixels
 oledIsConnected = False
 cayenneChannel=1
 # Cayenne definitions
-CLIENT_ID="d6accfc0-6541-11e9-bdb5-dfd20f02ea3f"
+CLIENT_ID="CAYENNE_CLIENT_ID"
 
 intensityChannel=1
 illuminationLedChannel=2

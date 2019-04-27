@@ -12,9 +12,9 @@ import time
 import logging
 
 # Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
-MQTT_USERNAME  = "7c70a330-69af-11e8-a76a-fdebb8d0010d"
-MQTT_PASSWORD  = "32d184add41570759dd1735fa464cef7e62876a4"
-MQTT_CLIENT_ID = "dae86710-4ae9-11e9-a6b5-e30ec853fbf2"
+MQTT_USERNAME  = "CAYENNE_USERNAME"
+MQTT_PASSWORD  = "CAYENNE_PASSWORD"
+MQTT_CLIENT_ID = "CAYENNE_CLIENT_ID"
 
 global ledChannel
 global builtinLed
