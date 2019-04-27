@@ -26,7 +26,7 @@ green=0
 blue=0
 
 # a typical message from Cayenne looks as follows:
-# topic:  b'v1/7c70a330-69af-11e8-a76a-fdebb8d0010d/things/dae86710-4ae9-11e9-a6b5-e30ec853fbf2/cmd/2'
+# topic:  b'v1/7cxxxxxxxxxxx-yyyy-zzzz-dddddddddd0d/things/33333333-4ddd-1111-yyyy-dddddddddddd/cmd/2
 # the value after /cmd/ is the channel number
 # msg:    b'uvtDurLwnJnpGqE,112'
 # the value after the ',' is the new slider value
@@ -97,7 +97,7 @@ neoPixel.write()
         #c.wait_msg()
     #except OSError:
         #pass
-cmdTopic=b'v1/7c70a330-69af-11e8-a76a-fdebb8d0010d/things/dae86710-4ae9-11e9-a6b5-e30ec853fbf2/cmd/2'
+cmdTopic=b'v1/7cxxxxxxxxxxx-yyyy-zzzz-dddddddddd0d/things/33333333-4ddd-1111-yyyy-dddddddddddd/cmd/2'
 msg=b'uvtDurLwnJnpGqE,112'
 while True:
   ledUpdate(cmdTopic,msg)
