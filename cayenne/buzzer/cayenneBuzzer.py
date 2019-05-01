@@ -17,12 +17,12 @@ MQTT_CLIENT_ID = "CAYENNE_CLIENT_ID" #insert your client ID
 MQTT_USERNAME='CAYENNE_USERNAME' #insert your MQTT username
 MQTT_PASSWORD='CAYENNE_PASSWORD' #insert your MQTT password
 
-laptopClient="CLIENT_ID_OF_LAPTOP_CLIENT"
+laptopClient="LAPTOP_CLIENT_ID"
 
 PWM_PIN=14
 speaker_pin=Pin(PWM_PIN)
 speaker = PWM(speaker_pin)
-musicChannel = 11
+musicChannel = 1
 
 songList={
     1:'Super Mario - Main Theme',
@@ -52,7 +52,8 @@ songList={
     25:'MissionImp'
 }
 
-client = cayenne.client.CayenneMQTTClient()
+TOPIC_BASE = ("v1/%s/things/" % MQTT_USERNAME)
+client = cayenne.client.CayenneMQTTClient(True)
 client.begin(MQTT_USERNAME, MQTT_PASSWORD, MQTT_CLIENT_ID, loglevel=logging.INFO)
 
 
@@ -71,7 +72,8 @@ def getSongNumber(message):
     msg = cayenne.client.CayenneMessage(message[0],message[1])
     if msg.channel == musicChannel:
         # extract the song number
-        songNo = int(msg.value)
+        print(msg.value)        
+        songNo = int(msg.value.split("=")[1])
         print("song number: %d"%songNo)
         songName = songList.get(songNo)    
         print('Playing the song: %s'%songName)
@@ -79,15 +81,25 @@ def getSongNumber(message):
         tune = RTTTL(songs.find(songName))
         for freq, msec in tune.notes():
             play_tone(freq, msec)
+            
+def subscribeCayenne(clientID,channel):
+  topic= TOPIC_BASE + clientID +'/cmd/%d'%channel
+  print("Subscribing to topic %s, please wait 5 s"%topic)
+  time.sleep(0.5)
+  client.client.subscribe(topic)
+  print("Subscribe sent")
+  
+# subscribe cmd messages from the laptop client
+subscribeCayenne(laptopClient,1)
 
 client.on_message = getSongNumber
-
-while True:
-    try:
-        print("Wait for mgs")
-        client.wait_msg()
-    except OSError:
-        pass
+client.loop_forever()
+#while True:
+    #try:
+        #print("Wait for mgs")
+        #client.wait_msg()
+    #except OSError:
+        #pass
 
 
 
