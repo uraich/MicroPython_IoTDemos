@@ -1,15 +1,20 @@
 #
 # matrix.py a test program for the LED matrix
-# a value of 0..63 will light 0 .. 63 LEDs
+# a value of 0..64 will light 0 .. 64 LEDs
 # written for the workshop on IoT at the
 # African Internet Summit 2019, Kampala, Uganda
 # Copyright U. Raich
 # This program is released under GPL
 
 import ledMatrix.mled
-import time
-_CLK = 14
-_DIN = 13
+import time,sys
+
+if sys.platform == "esp8266":
+    _CLK = 14
+    _DIN = 13
+else:
+    _CLK = 18
+    _DIN = 23
 
 class LedMatrix:
     def __init__(self):

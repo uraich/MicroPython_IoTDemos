@@ -5,17 +5,31 @@
 # It is released under GPL
 
 from machine import Pin
-import time
+import sys,time
 
-button = Pin(0,Pin.IN,Pin.PULL_UP)
+print("Testing the push button")
+print("Program written for the workshop on IoT at the")
+print("African Internet Summit 2019")
+print("Copyright: U.Raich")
+print("Released under the Gnu Public License")
 
+if sys.platform == "esp8266":
+    print("Running on ESP8266")
+    button = Pin(0,Pin.IN,Pin.PULL_UP)
+else:
+    print("Running on ESP32") 
+    button = Pin(17,Pin.IN,Pin.PULL_UP)
+
+msg="not pressed"
+len
 while True:
     value = button.value()
     if value == 0:
-        print("The switch is pressed    ",end='\r',flush=True)
+        print("The switch is pressed    ")
     else:
-        print("The switch is not pressed",end='\r',flush=True)
+        print("The switch is not pressed")
     time.sleep(1)    
-    
+
+ 
 
 

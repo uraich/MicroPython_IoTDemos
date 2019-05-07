@@ -1,11 +1,24 @@
 # Test the OLED shield featuring the SSD1306 display driver
 
 import machine, time, ssd1306
+import sys
 
-pinScl      =  5  #ESP8266 GPIO5 (D1)
-pinSda      =  4  #ESP8266 GPIO4 (D2)
+print("Testing the ssd1306 OLED display")
+print("Program written for the workshop on IoT at the")
+print("African Internet Summit 2019")
+print("Copyright: U.Raich")
+print("Released under the Gnu Public License")
+if sys.platform == "esp8266":
+    print("Running on ESP8266")
+    pinScl      =  5  #ESP8266 GPIO5 (D1
+    pinSda      =  4  #ESP8266 GPIO4 (D2)
+else:
+    print("Running on ESP32") 
+    pinScl      =  22  # SCL on esp32 
+    pinSda      =  21  # SDA ON ESP32
+    
 addrOled    = 60  #0x3c
-addrBME280  = 118 #0x76
+
 hSize       = 48  # Hauteur ecran en pixels | display heigh in pixels
 wSize       = 64  # Largeur ecran en pixels | display width in pixels
 

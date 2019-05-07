@@ -9,9 +9,9 @@ import time
 
 from ledMatrix import matrix
 m = matrix.LedMatrix()
-m.clear()
 time.sleep(0.5)
 m.setLevel(0)
-#for i in range(0,64):
-#    matrix.setLevel(i)
-#    time.sleep(0.1)
+for i in range(0,65):
+    m.setLevel(i)
+    time.sleep(0.1)
+m.setLevel(0)

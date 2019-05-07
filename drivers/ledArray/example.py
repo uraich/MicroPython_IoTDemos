@@ -3,8 +3,9 @@ import ledMatrix.mled, animations
 class Example:
 
     boards = {
-        'd1_mini': (13, 14),
-        'mh_et_live_minikit': (23, 18)
+        'd1_mini_esp8266':    (13, 14),
+        'd1_mini_esp32':      (23, 18),
+        'mh_et_live_minikit': (23, 18)        
     }
 
     def main(self, model):
@@ -32,4 +33,4 @@ class Example:
 
 
 app = Example()
-app.main('d1_mini')
+app.main('d1_mini_esp32')

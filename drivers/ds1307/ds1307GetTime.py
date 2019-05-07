@@ -5,8 +5,19 @@ from machine import *
 from ds1307 import *
 import sys
 
-pinScl      =  5  #ESP8266 GPIO5 (D1)
-pinSda      =  4  #ESP8266 GPIO4 (D2)
+print("Testing the DS1307 real time clock")
+print("Program written for the workshop on IoT at the")
+print("African Internet Summit 2019")
+print("Copyright: U.Raich")
+print("Released under the Gnu Public License")
+if sys.platform == "esp8266":
+    print("Running on ESP8266")
+    pinScl      =  5  #ESP8266 GPIO5 (D1
+    pinSda      =  4  #ESP8266 GPIO4 (D2)
+else:
+    print("Running on ESP32") 
+    pinScl      =  22  # SCL on esp32 
+    pinSda      =  21  # SDA ON ESP32
 
 addrDS1307=0x68
 # dateAndTime: yy mm dd ww hh mm ss 

@@ -5,15 +5,26 @@ from machine import *
 from ds1307 import *
 import sys
 
-pinScl      =  5  #ESP8266 GPIO5 (D1)
-pinSda      =  4  #ESP8266 GPIO4 (D2)
+print("Testing the DS1307 readl time clock")
+print("Program written for the workshop on IoT at the")
+print("African Internet Summit 2019")
+print("Copyright: U.Raich")
+print("Released under the Gnu Public License")
+if sys.platform == "esp8266":
+    print("Running on ESP8266")
+    pinScl      =  5  #ESP8266 GPIO5 (D1
+    pinSda      =  4  #ESP8266 GPIO4 (D2)
+else:
+    print("Running on ESP32") 
+    pinScl      =  22  # SCL on esp32 
+    pinSda      =  21  # SDA ON ESP32
 
 addrDS1307=0x68
 # dateAndTime: yy mm dd ww hh mm ss 
-dateAndTime=(2019,3,25,1,17,51,0)
+dateAndTime=(2019,5,7,2,15,31,0)
 
 # init ic2 object
-i2c = I2C(scl=Pin(pinScl), sda=Pin(pinSda)) #ESP8266 5/4
+i2c = I2C(scl=Pin(pinScl), sda=Pin(pinSda)) 
 
 # Scan i2c bus and check if DS1307 is connected
 print('Scan i2c bus...')
