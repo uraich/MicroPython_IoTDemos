@@ -50,9 +50,6 @@ COMMAND_TOPIC = "cmd"
 DATA_TOPIC = "data"
 RESPONSE_TOPIC = "response"
 
-SSID="SFR_A0F0_EXT"             #insert your wifi ssid
-PASSWORD="osto7rawayristaxtris" #insert your wifi password
-
 class CayenneMessage:
     """ This is a class that describes an incoming Cayenne message. It is
     passed to the on_message callback as the message parameter.
