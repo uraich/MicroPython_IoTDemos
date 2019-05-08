@@ -21,8 +21,15 @@ intensityChannel=1
 illuminationLedChannel=2
 indicatorLedChannel=3
 # create adc and the led object
-adc = ADC(0)
-illuminationLed = Pin(16,Pin.OUT)
+if sys.platform == "esp8266":
+    print("photoResistor.py running on ESP8266")
+    illuminationLed = Pin(16,Pin.OUT)
+    adc = ADC(0)
+else:
+    print("photoResistor.py running on ESP32") 
+    adc = ADC(Pin(36))
+    illuminationLed = Pin(26,Pin.OUT)
+    
 count=0
 ledValue=0
 # switch LED off

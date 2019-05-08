@@ -36,7 +36,7 @@ neoPixel = neopixel.NeoPixel(Pin(pin), n)
 
 # switch the LED off, it is too bright!
 
-neoPixel[0] = (red, green,blue)
+neoPixel[0] = (green, red, blue)
 neoPixel.write()
 
 def ledUpdate(topic,msg):

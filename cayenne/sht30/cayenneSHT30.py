@@ -21,8 +21,17 @@ MQTT_CLIENT_ID = "CAYENNE_CLIENT_ID"
 sht30TempChannel = 5
 sht30HumidityChannel = 6
 
+if sys.platform == "esp8266":
+    print("Running on ESP8266")
+    pinScl      =  5  #ESP8266 GPIO5 (D1
+    pinSda      =  4  #ESP8266 GPIO4 (D2)
+else:
+    print("Running on ESP32") 
+    pinScl      =  22  # SCL on esp32 
+    pinSda      =  21  # SDA ON ESP32
+    
 # create SHT30 object
-sht30=SHT30()
+sht30=SHT30(scl_pin=pinScl, sda_pin=pinSda)
 # Check if SHT30 is connected
 if not sht30.is_present():
     print("Could not find SHT30 board. Please connect it")

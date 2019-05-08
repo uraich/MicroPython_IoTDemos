@@ -1,7 +1,7 @@
 efrom umqtt.robust import MQTTClient
 from machine import Pin
 import network
-import time, neopixel
+import time, sys, neopixel
 
 #wifi setting
 SSID="WIFI_SSID" #insert your wifi ssid
@@ -14,7 +14,13 @@ password='CAYENNE_PASSWORD' #insert your MQTT password
 TOPIC_BASE = ("v1/%s/things/%s/" % (username, CLIENT_ID))
 
 n=1        # number of LEDs
-pin = 4    # connected to GPIO 4
+if sys.platform == "esp8266":
+    print("cayenneWS2812B running on ESP8266")
+    pin = 4   # connected to GPIO 4 on esp8266
+else:
+    print("cayenneWS2812B running on ESP32") 
+    pin = 21   # connected to GPIO 21 on esp32
+    
 channelRED   = 3
 channelGREEN = 2
 channelBLUE  = 4
@@ -67,7 +73,7 @@ def ledUpdate(topic,msg):
     green=value
   if channel == channelBLUE:
     blue = value
-  print("red: %d, green: %d, blue: %d"%(red,green,blue))
+  print("red: %d, green: %d, blue: %d"%(green,red, blue))
 
   print("before writing LED")
   neoPixel[0] = (green, red, blue)

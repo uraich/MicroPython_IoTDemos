@@ -9,7 +9,7 @@
 #
 from machine import Pin,ADC
 import cayenne.client
-import time
+import time,sys
 import logging
 
 # Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
@@ -24,7 +24,16 @@ global illuminationLed,indicatorLed
 intensityChannel = 1
 illuminationLedChannel=2
 indicatorLedChannel=3
-illuminationLed = Pin(16,Pin.OUT)
+
+if sys.platform == "esp8266":
+    print("ledControl.py running on ESP8266")
+    illumimationLed = Pin(16,Pin.OUT)
+    adc = ADC(0)
+else:
+    print("ledControl running on ESP32") 
+    illuminationLed = Pin(26,Pin.OUT)
+    adc = ADC(Pin(36))
+
 indicatorLed = Pin(2,Pin.OUT)
 
 # callback routine to treat command messages from Cayenne
@@ -49,7 +58,7 @@ def on_message(message):
     return
 
 # create adc and the led object
-adc = ADC(0)
+
 count=0
 ledValue=0
 # switch LED off

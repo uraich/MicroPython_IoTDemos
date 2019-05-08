@@ -1,7 +1,7 @@
 from machine import Pin
 from cayenne import Cayenne
 import network
-import time
+import time,sys
 import dht
 
 # the device is on GPIO 0
@@ -14,8 +14,12 @@ tempChannel=7
 humidityChannel=8
 
 # create the dht11 object
-dht11=dht.DHT11(Pin(2))
-
+if sys.platform == "esp8266":
+    print("cayenneDHT11 running on ESP8266")
+    dht11 = dht.DHT11(Pin(2))
+else:
+    print("cayenneDHT11 running on ESP32") 
+    dht11 = dht.DHT11(Pin(16))
 cayenne=Cayenne()
 cayenne.mqttConnect()
 

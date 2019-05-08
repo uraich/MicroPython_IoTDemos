@@ -23,7 +23,18 @@ def senddata():
   cayenne.publish(str(humidityChannel),dataString)
   time.sleep(5)
 
-sht30=SHT30()
+if sys.platform == "esp8266":
+    print("Running on ESP8266")
+    pinScl      =  5  #ESP8266 GPIO5 (D1
+    pinSda      =  4  #ESP8266 GPIO4 (D2)
+else:
+    print("Running on ESP32") 
+    pinScl      =  22  # SCL on esp32 
+    pinSda      =  21  # SDA ON ESP32
+    
+# create SHT30 object
+sht30=SHT30(scl_pin=pinScl, sda_pin=pinSda)
+
 if not sht30.is_present():
     print("Could not find SHT30 board. Please connect it")
     sys.exit()
