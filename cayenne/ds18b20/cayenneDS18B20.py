@@ -9,15 +9,19 @@
 #
 from machine import Pin
 import cayenne.client
-import time
+import time,sys
 import onewire
 import ds18x20
 import logging
 
-# the device is on GPIO 4
-dat = Pin(4)
-pinScl         =  5  #ESP8266 GPIO5 (D1)
-pinSda         =  4  #ESP8266 GPIO4 (D2)
+# the device is on GPIO 4 (ESP8266) or on GPIO21 (ESP32)
+
+if sys.platform == "esp8266":
+    print("Running on ESP8266")
+    dat = Pin(4)
+else:
+    print("Running on ESP32") 
+    dat = Pin(21)
 
 # Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
 MQTT_USERNAME  = "CAYENNE_USERNAME"

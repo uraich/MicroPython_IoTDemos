@@ -1,7 +1,7 @@
 from umqtt.simple import MQTTClient
 from machine import Pin
 import network
-import time
+import time,sys
 
 #wifi setting
 SSID="WIFI_SSID" #insert your wifi ssid
@@ -14,7 +14,12 @@ password='CAYENNE_PASSWORD' #insert your MQTT password
 
 TOPIC = ("v1/%s/things/%s/data/1" % (username, CLIENT_ID))
 
-button=Pin(0,Pin.IN,pull=Pin.PULL_UP) # Declaring button on GPIO 0
+if sys.platform == "esp8266":
+    print("cayenneButton running on ESP8266")
+    button = Pin(0,Pin.IN,Pin.PULL_UP)
+else:
+    print("cayenneButton running on ESP32") 
+    button = Pin(17,Pin.IN,Pin.PULL_UP)
 
 def connectWifi(ssid,passwd):
   global wlan

@@ -10,6 +10,7 @@
 from machine import I2C,Pin
 from bmp180 import BMP180
 import cayenne.client
+import sys
 import time
 
 import logging
@@ -24,7 +25,13 @@ MQTT_CLIENT_ID = "CAYENNE_CLIENT_ID"
 bmp180TempChannel  = 12
 bmp180PressChannel = 13
 
-bus =  I2C(scl=Pin(5), sda=Pin(4), freq=100000)   # on esp8266
+if sys.platform == "esp8266":
+    print("cayenneBMP180 running on ESP8266")
+    bus =  I2C(scl=Pin(5), sda=Pin(4), freq=100000)   # on esp8266
+else:
+    print("cayenneBMP180 running on ESP32") 
+    bus = I2C(scl=Pin(22), sda=Pin(21), freq=100000)   # on esp32
+    
 bmp180 = BMP180(bus)
 bmp180.oversample_sett = 2
 bmp180.baseline = 101325

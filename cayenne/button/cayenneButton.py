@@ -9,7 +9,7 @@
 #
 from machine import Pin
 import cayenne.client
-import time
+import time,time
 import logging
 
 # Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
@@ -18,15 +18,24 @@ MQTT_PASSWORD  = "CAYENNE_PASSWORD"
 MQTT_CLIENT_ID = "CAYENNE_CLIENT_ID"
 
 buttonChannel = 10
-button=Pin(0,Pin.IN,pull=Pin.PULL_UP) # Declaring button on GPIO 0
+if sys.platform == "esp8266":
+    print("cayenneButton running on ESP8266")
+    button = Pin(0,Pin.IN,Pin.PULL_UP)
+else:
+    print("cayenneButton running on ESP32") 
+    button = Pin(17,Pin.IN,Pin.PULL_UP)
 
 client = cayenne.client.CayenneMQTTClient()
 client.begin(MQTT_USERNAME, MQTT_PASSWORD, MQTT_CLIENT_ID, loglevel=logging.INFO)
 
 def senddata():
   pbValue=button.value()
+  # button is active low
+  if (pbValue):
+      client.digitalWrite(buttonChannel,0)
+  else:
+      client.digitalWrite(buttonChannel,1)
 
-  client.digitalWrite(buttonChannel,pbValue)
   time.sleep(5)
   
 while True:

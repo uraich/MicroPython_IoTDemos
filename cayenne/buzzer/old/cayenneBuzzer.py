@@ -19,8 +19,14 @@ password='CAYENNE_PASSWORD' #insert your MQTT password
 
 laptopClient="LAPTOP_CLIENT_ID"
 
-PWM_PIN=14
-speaker_pin=Pin(PWM_PIN)
+if sys.platform == "esp8266":
+    print("cayenneBuzzer running on ESP8266")
+    pwmPin = 14
+else:
+    print("cayenneBuzzer running on ESP32") 
+    pwmPin = 18
+    
+speaker_pin=Pin(pwmPin)
 speaker = PWM(speaker_pin)
 
 songList={
