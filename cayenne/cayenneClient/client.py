@@ -13,8 +13,8 @@ hSize       = 48  # Hauteur ecran en pixels | display height in pixels
 wSize       = 64  # Largeur ecran en pixels | display width in pixels
 
 #wifi setting
-SSID="SFR_A0F0_EXT" #insert your wifi ssid
-PASSWORD="osto7rawayristaxtris" #insert your wifi password
+SSID="WIFI_SSID" #insert your wifi ssid
+PASSWORD="WIFI_PASSWORD" #insert your wifi password
 
 # LOG
 LOG_NAME = "CayenneMQTTClient"
