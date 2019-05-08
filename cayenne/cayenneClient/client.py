@@ -1,22 +1,20 @@
 from umqtt.simple import MQTTClient
 from machine import Pin,I2C
 import network
-import time
+import time,sys
 import ssd1306
 
 from cayenne import __version__
 import logging
 import sys
 
-pinScl      =  5  #ESP8266 GPIO5 (D1)
-pinSda      =  4  #ESP8266 GPIO4 (D2)
 addrOled    = 60  #0x3c
 hSize       = 48  # Hauteur ecran en pixels | display height in pixels
 wSize       = 64  # Largeur ecran en pixels | display width in pixels
 
 #wifi setting
-SSID="WIFI_SSID" #insert your wifi ssid
-PASSWORD="WIFI_PASSWORD" #insert your wifi password
+SSID="SFR_A0F0_EXT" #insert your wifi ssid
+PASSWORD="osto7rawayristaxtris" #insert your wifi password
 
 # LOG
 LOG_NAME = "CayenneMQTTClient"
@@ -52,8 +50,8 @@ COMMAND_TOPIC = "cmd"
 DATA_TOPIC = "data"
 RESPONSE_TOPIC = "response"
 
-SSID="WIFI_SSID"             #insert your wifi ssid
-PASSWORD="WIFI_PASSWORD" #insert your wifi password
+SSID="SFR_A0F0_EXT"             #insert your wifi ssid
+PASSWORD="osto7rawayristaxtris" #insert your wifi password
 
 class CayenneMessage:
     """ This is a class that describes an incoming Cayenne message. It is
@@ -95,23 +93,38 @@ class CayenneMQTTClient:
     The callback function should have the following signature: on_message(message)
     The message variable passed to the callback is an instance of the CayenneMessage class.
     """
-    def __init__(self):
-        
-        # init ic2 object
-        i2c = I2C(scl=Pin(pinScl), sda=Pin(pinSda)) #ESP8266 5/4
-        # Scan the i2c bus and verify if the OLED sceen is connected
-        print('Scan i2c bus...')
+    def __init__(self,testOled=False):
+        # if the shield uses the D1 or D2 line this would create a clash
+        # with the I2C SCL and SDA lines of the Oled display
+        # create the client object with testOled=False in this case
+        if testOled:
+            if sys.platform == "esp8266":
+                #print("Running on ESP8266")
+                pinScl      =  5  #ESP8266 GPIO5 (D1
+                pinSda      =  4  #ESP8266 GPIO4 (D2)
+            else:
+                #print("Running on ESP32") 
+                pinScl      =  22  # SCL on esp32 
+                pinSda      =  21  # SDA ON ESP32
+                
+            # init ic2 object
+            i2c = I2C(scl=Pin(pinScl), sda=Pin(pinSda)) #ESP8266 5/4
+            # Scan the i2c bus and verify if the OLED sceen is connected
+            print('Scan i2c bus...')
 
-        self.devices = i2c.scan()
-        if len(self.devices) == 0:
-            print("No i2c device !")
-            self.oledIsConnected = False
+            self.devices = i2c.scan()
+            if len(self.devices) == 0:
+                print("No i2c device !")
+                self.oledIsConnected = False
+            else:
+                for self.device in self.devices:
+                    print("OLED found")
+                    if self.device == addrOled:
+                        self.oled = ssd1306.SSD1306_I2C(wSize, hSize, i2c, addrOled)
+                        self.oledIsConnected = True
         else:
-            for self.device in self.devices:
-                print("OLED found")
-                if self.device == addrOled:
-                    self.oled = ssd1306.SSD1306_I2C(wSize, hSize, i2c, addrOled)
-                    self.oledIsConnected = True
+            self.oledIsConnected=False
+            
         self.client = None
         self.rootTopic = ""
         self.connected = False
