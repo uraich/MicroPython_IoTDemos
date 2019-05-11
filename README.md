@@ -32,6 +32,6 @@ We have a collection of a dozen different sensor and actuator boards for the WeM
 * **adcAndLed**: Switches the LED on and off and measures the light seen on the photo resistor, which is printed on the screen
 
 ## The Cayenne programs
-The Cayenne programs are based on the hardware access code. They first connect to WiFi and the to the Cayenne MQTT server: mqtt.mydevices.com. The sensors are read out in a similar way to what is done in the hardware access programs and the results are published on Cayenne. In case of the actuators, a callback function is registered with the Cayenne client. This callback is notified when a change on the Cayenne widgets (slider or button) arrises and the corresponding action is taken on the hardware.
+The Cayenne programs are based on the hardware access code. They first connect to WiFi and then to the Cayenne MQTT server: mqtt.mydevices.com. The sensors are read out in a similar way to what is done in the hardware access programs and the results are published on Cayenne. In case of the actuators, a callback function is registered with the Cayenne client. This callback is notified when a change on the Cayenne widgets (slider or button) arrises and the corresponding action is taken on the hardware.
 
 Example: a color slider is moved on Cayenne: the corresponding color on the ws2812 rgb LED changes.
