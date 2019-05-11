@@ -16,6 +16,7 @@ We have a collection of a dozen different sensor and actuator boards for the WeM
 * ds1307GetTime.py: Reads the current date and time from the ds1307 RTC and prints it in a humanly readable form
 * ds18b20Test.py: Reads the ambient temperature from a Maxim DS18B20 1-wire digital thermometer and prints the result. The ds18b20 driver included in Micropython is used.
 * i2cScan.py: Scans the I2C bus for devices connected. It prints the I2C address for each device found.
+
 ledArray: 
 
 * example.py: This is the example provided in the mled library. For it to work animations.py and pixelart.py must be available in the lib directory of the CPU flash. You must define the CPU used when calling the main program (last line in the code)
