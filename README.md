@@ -17,5 +17,6 @@ We have a collection of a dozen different sensor and actuator boards for the WeM
 * ds18b20Test.py: Reads the ambient temperature from a Maxim DS18B20 1-wire digital thermometer and prints the result. The ds18b20 driver included in Micropython is used.
 * i2cScan.py: Scans the I2C bus for devices connected. It prints the I2C address for each device found.
 * ledArray: 
-** example.py: This is the example provided in the mled library. For it to work animations.py and pixelart.py must be available in the lib directory of the CPU flash. You must define the CPU used when calling the main program (last line in the code)
-** matrix.py: Runs through values 0..64 and switches on the number of leds given by this value. The bottom left LED is considered LED 1.
+
+* example.py: This is the example provided in the mled library. For it to work animations.py and pixelart.py must be available in the lib directory of the CPU flash. You must define the CPU used when calling the main program (last line in the code)
+* matrix.py: Runs through values 0..64 and switches on the number of leds given by this value. The bottom left LED is considered LED 1.
