@@ -16,8 +16,18 @@ We have a collection of a dozen different sensor and actuator boards for the WeM
 * ds1307GetTime.py: Reads the current date and time from the ds1307 RTC and prints it in a humanly readable form
 * ds18b20Test.py: Reads the ambient temperature from a Maxim DS18B20 1-wire digital thermometer and prints the result. The ds18b20 driver included in Micropython is used.
 * i2cScan.py: Scans the I2C bus for devices connected. It prints the I2C address for each device found.
+* ssd1306Test.py: Prints some text on the ssd1306 I2C Oled display. 
+* helloLed.py:  This is the "embedded systems Hello World! program": the blinking LED. The built-in led on the CPU card is used.
+* ws2812.py: Exercises the WS1821B rgb LED. Cycles through a number of colors.
 
 ledArray: 
 
 * example.py: This is the example provided in the mled library. For it to work animations.py and pixelart.py must be available in the lib directory of the CPU flash. You must define the CPU used when calling the main program (last line in the code)
 * matrix.py: Runs through values 0..64 and switches on the number of leds given by this value. The bottom left LED is considered LED 1.
+
+prototype: This is a home made prototype board featuring a photo resistor and an LED. 
+
+* led.py: blinks the LED
+* adc.py: reads out the luminosity (voltage) on the photo resistor using the ADC built into the CPU. Note: The ESP8266 has a 10 bit ADC while the ESP32's ADC provides 12 bit resolution
+* adcAndLed: Switches the LED on and off and measures the light seen on the photo resistor, which is printed on the screen
+
