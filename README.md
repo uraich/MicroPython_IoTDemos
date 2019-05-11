@@ -31,3 +31,4 @@ We have a collection of a dozen different sensor and actuator boards for the WeM
 * **adc.py**: reads out the luminosity (voltage) on the photo resistor using the ADC built into the CPU. Note: The ESP8266 has a 10 bit ADC while the ESP32's ADC provides 12 bit resolution
 * **adcAndLed**: Switches the LED on and off and measures the light seen on the photo resistor, which is printed on the screen
 
+## The Cayenne programs
