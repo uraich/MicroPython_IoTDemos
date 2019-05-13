@@ -17,7 +17,7 @@ We have a collection of a dozen different sensor and actuator boards for the WeM
 * **ds18b20Test.py**: Reads the ambient temperature from a Maxim DS18B20 1-wire digital thermometer and prints the result. The ds18b20 driver included in Micropython is used.
 * **i2cScan.py**: Scans the I2C bus for devices connected. It prints the I2C address for each device found.
 * **ssd1306Text.py**: Prints some text on the ssd1306 I2C Oled display. 
-* **ssd1306Test.py**: Shows some simple graphics on the display. Lines, rectangles. circles and a sin function plot are demonstrated. 
+* **ssd1306Test.py**: Shows some simple graphics on the display. Lines, rectangles, circles and a sin function plot are demonstrated. 
 * **ws2812.py**: Exercises the WS1821B rgb LED. Cycles through a number of colors.
 
 **builtin LED**:  
