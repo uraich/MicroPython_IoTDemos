@@ -17,8 +17,12 @@ We have a collection of a dozen different sensor and actuator boards for the WeM
 * **ds18b20Test.py**: Reads the ambient temperature from a Maxim DS18B20 1-wire digital thermometer and prints the result. The ds18b20 driver included in Micropython is used.
 * **i2cScan.py**: Scans the I2C bus for devices connected. It prints the I2C address for each device found.
 * **ssd1306Test.py**: Prints some text on the ssd1306 I2C Oled display. 
-* **helloLed.py**:  This is the "embedded systems Hello World! program": the blinking LED. The built-in led on the CPU card is used.
 * **ws2812.py**: Exercises the WS1821B rgb LED. Cycles through a number of colors.
+
+**builtin LED**:  
+* **helloLED.py**: This is the "embedded systems Hello World! program": the blinking LED. The built-in led on the CPU card is used.
+* **ledOff**: Switches the built-in LED off
+* **pwmLED**: Changes the light intensity on the built-in LED along a sin curve using pulse width modulation (PWM)
 
 **ledArray:** 
 
