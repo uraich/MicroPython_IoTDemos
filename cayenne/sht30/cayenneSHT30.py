@@ -1,6 +1,6 @@
 #
-# cayenneDHT11.py
-# Reads out the DHT11 temperature and humidity and sends the measurement
+# cayenneSHT30.py
+# Reads out the SHT30 temperature and humidity and sends the measurement
 # to Cayenne
 # copyright U. Raich
 # This is a demo program for the workshop on IoT at the
