@@ -8,6 +8,8 @@ hello="Hello World"
 print("hello is of",type(hello), "and has the value",hello)
 h=b'Hello World'
 print("h is of",type(h), "and has the value",h)
+ready = True
+print("ready is of",type(ready), "and has the value",ready)
 c = complex(3,6)
 print("c is of",type(c), "and has the value",c)
 cars=('honda','fiat','porsche','mercedes','ferrari')
