@@ -11,7 +11,7 @@
 from machine import Pin
 import neopixel
 import cayenne.client
-import time
+import time,sys
 import logging
 
 # Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
@@ -19,14 +19,19 @@ MQTT_USERNAME  = "CAYENNE_USERNAME"
 MQTT_PASSWORD  = "CAYENNE_PASSWORD"
 MQTT_CLIENT_ID = "CAYENNE_CLIENT_ID"
 
-TOPIC_BASE = ("v1/%s/things/%s/" % (MQTT_USERNAME, MQTT_CLIENT_ID))
 global redChannel,blueChannel,greenChannel
 
 n=1          # no of LEDS
-pin=4        # connected to GPIO 4
-channelRED   = 3
-channelGREEN = 2
-channelBLUE  = 4
+if sys.platform == "esp8266":
+    print("cayenneWS2812B running on ESP8266")
+    pin = 4   # connected to GPIO 4 on esp8266
+else:
+    print("cayenneWS2812B running on ESP32") 
+    pin = 21   # connected to GPIO 21 on esp32
+    
+redChannel   = 3
+greenChannel = 2
+blueChannel  = 4
 global red,green,blue
 red=0
 green=0
@@ -36,62 +41,40 @@ neoPixel = neopixel.NeoPixel(Pin(pin), n)
 
 # switch the LED off, it is too bright!
 
-neoPixel[0] = (green, red, blue)
+neoPixel[0] = (red, green, blue)
 neoPixel.write()
+time.sleep(1)
 
-def ledUpdate(topic,msg):
-  global red,green,blue
-  
-  print("Channel red: %d, channel green: %d, channel blue: %d"%(channelRED,channelGREEN,channelBLUE))
-  print((topic,msg))
-  channelIndex = topic.index(b'cmd')+4              # search for 'cmd' the channel no follows
-  print("channelIndex: %d"%channelIndex)
-  channel = int(topic[channelIndex:])               # from the channel index to the end
-  print("channel: %d"%channel)
-  valueIndex = msg.index(b',')+1;
-  print("valueIndex: %d"%valueIndex)
-  value = int(msg[valueIndex:])
-  print("value: %d"%value)
-  print("red: %d"%red)
-  # now set the new value on the rgb LED
+# callback routine to treat command messages from Cayenne
+def ledUpdate(message):
+    global red,green,blue
+    msg = cayenne.client.CayenneMessage(message[0],message[1])
+    if msg.channel == redChannel:
+        red=int(msg.value);
+        print("Setting red to %d"%red)
+    elif msg.channel == greenChannel:
+        green=int(msg.value)
+        print("Setting green to %d"%green)
+    elif msg.channel == blueChannel:
+        blue=int(msg.value)
+        print("Setting blue to %d"%blue)
+    print("writing the LED with r: %d, g: %d, b:%d"%(red,green,blue))
+    
+    neoPixel[0] = (red, green, blue)
+    neoPixel.write() 
+    return
 
-  if channel == channelRED:
-    print("red")
-    print("value: %d"%value)
-    red=value
-
-  if channel == channelGREEN:
-    green=value
-  if channel == channelBLUE:
-    blue = value
-  print("red: %d, green: %d, blue: %d"%(red,green,blue))
-
-  print("before writing LED")
-  neoPixel[0] = (green, red, blue)
-  neoPixel.write()
-  
-def subscribeCayenne(channel):
-  topic= TOPIC_BASE + 'cmd/%d'%channel
-  print("Subscribing to topic %s, please wait 5 s"%topic)
-  time.sleep(0.5)
-  client.client.subscribe(topic)
-  print("Subscribe sent")
-  
-client = cayenne.client.CayenneMQTTClient()
+client = cayenne.client.CayenneMQTTClient(False)
 client.begin(MQTT_USERNAME, MQTT_PASSWORD, MQTT_CLIENT_ID, loglevel=logging.INFO)
 # register callback
-client.client.set_callback(ledUpdate)
-#client.on_message=ledUpdate
-if not client.client.connect(clean_session=False):
-  print("New session being set up")
-  subscribeCayenne(2)
-  subscribeCayenne(3)
-  subscribeCayenne(4)
-  
-while True:
-    try:
-        print("Wait for mgs")
-        client.client.wait_msg()
-    except OSError:
-      print("OS error")
+client.on_message=ledUpdate
 
+client.loop_forever()
+
+#while True:
+    #blue += 10;
+    #if blue > 250:
+        #blue = 0
+    #neoPixel[0] = (red, green,blue)
+    #neoPixel.write()
+    #time.sleep(0.1)
