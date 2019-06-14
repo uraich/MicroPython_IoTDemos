@@ -56,12 +56,13 @@ while True:
     
     print("Temperature: %d"%temp)
     print("Humidity: %d"%hum)
-    oledTemp="T: %d C"%temp
-    oledHum="H: %d %%"%hum
-    oled.fill(0)
-    oled.text("Temperature",0,0)
-    oled.text(oledTemp,0,10)
-    oled.text("Humidity",0,20)
-    oled.text(oledHum,0,30)
-    oled.show()
+    if oledIsConnected:
+        oledTemp="T: %d C"%temp
+        oledHum="H: %d %%"%hum
+        oled.fill(0)
+        oled.text("Temperature",0,0)
+        oled.text(oledTemp,0,10)
+        oled.text("Humidity",0,20)
+        oled.text(oledHum,0,30)
+        oled.show()
     time.sleep(2)
